@@ -520,47 +520,49 @@
                   </div>
                 </div>
                 <script>
-                  const cardList = document.querySelector(
-                    '[data-ow-templates="card-list"]'
-                  );
-                  const cardTemplate = cardList.querySelector(
-                    '[data-ow-templates="card"]'
-                  );
-
-                  fetch(
-                    "https://raw.githubusercontent.com/phamgiagia/opwebtemplate/refs/heads/main/public/data.json"
-                  )
-                    .then((response) => response.json())
-                    .then((data) => {
-                      cardList.innerHTML = ""; // Clear existing content
-
-                      data.forEach((item) => {
-                        const card = cardTemplate.cloneNode(true);
-                        card.classList.remove("hidden");
-
-                        const img = card.querySelector("img");
-                        img.src = item.image1;
-                        img.alt = item.name;
-
-                        const name = card.querySelector(
-                          '[data-ow-templates="card-name"]'
-                        );
-                        name.textContent = item.name;
-
-                        // Add click event listener to the entire card
-                        card.addEventListener("click", function () {
-                          window.open(item.urlDemo, "_blank");
-                        });
-
-                        // Add a cursor pointer to indicate clickability
-                        card.style.cursor = "pointer";
-
-                        cardList.appendChild(card);
-                      });
-                    })
-                    .catch((error) =>
-                      console.error("Error fetching data:", error)
+                  try {
+                    const cardList = document.querySelector(
+                      '[data-ow-templates="card-list"]'
                     );
+                    const cardTemplate = cardList.querySelector(
+                      '[data-ow-templates="card"]'
+                    );
+
+                    fetch(
+                      "https://raw.githubusercontent.com/phamgiagia/opwebtemplate/refs/heads/main/public/data.json"
+                    )
+                      .then((response) => response.json())
+                      .then((data) => {
+                        cardList.innerHTML = ""; // Clear existing content
+
+                        data.forEach((item) => {
+                          const card = cardTemplate.cloneNode(true);
+                          card.classList.remove("hidden");
+
+                          const img = card.querySelector("img");
+                          img.src = item.image1;
+                          img.alt = item.name;
+
+                          const name = card.querySelector(
+                            '[data-ow-templates="card-name"]'
+                          );
+                          name.textContent = item.name;
+
+                          // Add click event listener to the entire card
+                          card.addEventListener("click", function () {
+                            window.open(item.urlDemo, "_blank");
+                          });
+
+                          // Add a cursor pointer to indicate clickability
+                          card.style.cursor = "pointer";
+
+                          cardList.appendChild(card);
+                        });
+                      })
+                      .catch((error) =>
+                        console.error("Error fetching data:", error)
+                      );
+                  } catch (e) {}
                 </script>
               </div>
             </div>
